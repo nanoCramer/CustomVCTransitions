@@ -8,10 +8,13 @@
 
 #import "DismissAnimation.h"
 
+#define KImageTag       1001
+#define KViewTag        1000
+
 @implementation DismissAnimation
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext
 {
-    return 0.4f;
+    return 0.5f;
 }
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext
@@ -30,13 +33,26 @@
     [containerView addSubview:toVC.view];
     [containerView sendSubviewToBack:toVC.view];
     
+    UIView *scaleView;
+    UIView *logoView;
+    for (UIView *view in toVC.view.subviews) {
+        if (view.tag == KViewTag) {
+            scaleView = view;
+        } else if (view.tag == KImageTag) {
+            logoView = view;
+        }
+    }
+    CGRect logoRect = logoView.frame;
+    
     // 4. Do animate now
     fromVC.view.alpha = 0;
-    toVC.view.transform = CGAffineTransformMakeScale(10, 10);
+    scaleView.transform = CGAffineTransformMakeScale(10, 10);
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     [UIView animateWithDuration:duration animations:^{
-        toVC.view.transform = CGAffineTransformMakeScale(1, 1);
+        scaleView.transform = CGAffineTransformMakeScale(1, 1);
         fromVC.view.frame = finalFrame;
+        logoView.frame = CGRectMake(0, 0, logoRect.size.width, logoRect.size.height);
+        logoView.center = scaleView.center;
     } completion:^(BOOL finished) {
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
     }];

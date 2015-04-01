@@ -12,8 +12,13 @@
 #import "DismissAnimation.h"
 #import "SwipeUpInteractiveTransition.h"
 
+#define KImageLength    72
+#define KImageTag       1001
+
+#define KViewLength     100
+#define KViewTag        1000
+
 @interface MainViewController ()<ChildViewControllerDelegate,UIViewControllerTransitioningDelegate>
-@property (nonatomic, strong) UIView *aView;
 @property (nonatomic, strong) AppearAnimation *presentAnimation;
 @property (nonatomic, strong) DismissAnimation *dismissAnimation;
 @property (nonatomic, strong) SwipeUpInteractiveTransition *transitionController;
@@ -42,20 +47,27 @@
     CGFloat width = screenBounds.size.width;
     CGFloat height = screenBounds.size.height;
     
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, KImageLength, KImageLength)];
+    [imageView setImage:[UIImage imageNamed:@"lls.png"]];
+    [imageView setTag:KImageTag];
+    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button.frame = CGRectMake((width - 100)/2, (height - 100)/2 - 10, 100, 100);
+    button.frame = CGRectMake(0, 0, KViewLength, KViewLength);
     [button setTitle:@" " forState:UIControlStateNormal];
     [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.aView = [[UIView alloc] init];
-    [self.aView setFrame:CGRectMake((width - 100)/2, (height - 100)/2 - 10, 100, 100)];
-    [self.aView.layer setCornerRadius:50];
-    [self.aView setBackgroundColor:[UIColor greenColor]];
+    UIView *scaleview = [[UIView alloc] init];
+    [scaleview setTag:KViewTag];
+    [scaleview setFrame:CGRectMake((width - KViewLength)/2, (height - KViewLength)/2, KViewLength, KViewLength)];
+    [scaleview.layer setCornerRadius:KViewLength/2];
+    [scaleview setBackgroundColor:[UIColor colorWithRed:0.4f green:0.8f blue:1 alpha:1]];
     
-    [self.view setCenter:self.aView.center];
+    imageView.center = scaleview.center;
+    button.center = scaleview.center;
     
-    [self.view addSubview:self.aView];
+    [self.view addSubview:scaleview];
     [self.view addSubview:button];
+    [self.view addSubview:imageView];
 }
 
 -(void) buttonClicked:(id)sender

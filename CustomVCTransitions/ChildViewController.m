@@ -8,6 +8,15 @@
 
 #import "ChildViewController.h"
 
+#define KButtonW            160.0
+#define KButtonH            40.0
+#define KButtonY            400.0
+#define KAnimateDuration    0.5
+
+#define KImageLength    72
+#define KImageH         150
+#define KImageTag       1001
+
 @interface ChildViewController () {
     UIButton *button;
 }
@@ -29,22 +38,30 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor greenColor];
+    self.view.backgroundColor = [UIColor colorWithRed:0.4f green:0.8f blue:1 alpha:1];
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    CGFloat width = screenBounds.size.width;
     
     button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button.frame = CGRectMake((screenBounds.size.width - 160)/2, screenBounds.size.height, 160.0, 40.0);
+    button.frame = CGRectMake((screenBounds.size.width - KButtonW)/2, screenBounds.size.height, KButtonW, KButtonH);
     [button setTitle:@"Dismiss me" forState:UIControlStateNormal];
+    [button.titleLabel setFont:[UIFont boldSystemFontOfSize:18.0]];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((width - KImageLength)/2, KImageH, KImageLength, KImageLength)];
+    [imageView setImage:[UIImage imageNamed:@"lls.png"]];
+    [imageView setTag:KImageTag];
+    [self.view addSubview:imageView];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     
-    [UIView animateWithDuration:0.5 animations:^{
-        button.frame = CGRectMake((screenBounds.size.width - 160)/2, 400.0, 160.0, 40.0);
+    [UIView animateWithDuration:KAnimateDuration animations:^{
+        button.frame = CGRectMake((screenBounds.size.width - KButtonW)/2, KButtonY, KButtonW, KButtonH);
     } completion:^(BOOL finished) {
     }];
 }
