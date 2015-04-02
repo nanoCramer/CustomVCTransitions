@@ -17,7 +17,6 @@
 		DEE5AEEA1ACC567200E97198 /* AppearAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE5AEE91ACC567200E97198 /* AppearAnimation.m */; };
 		DEE5AEEC1ACC56C400E97198 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE5AEEB1ACC56C400E97198 /* CoreGraphics.framework */; };
 		DEE5AEEF1ACC570500E97198 /* DismissAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE5AEEE1ACC570500E97198 /* DismissAnimation.m */; };
-		DEE5AEF21ACC574A00E97198 /* SwipeUpInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE5AEF11ACC574A00E97198 /* SwipeUpInteractiveTransition.m */; };
 		DEE5AEFA1ACC585000E97198 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE5AEF91ACC585000E97198 /* UIKit.framework */; };
 		DEE5AEFC1ACC585900E97198 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE5AEFB1ACC585900E97198 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -52,8 +51,6 @@
 		DEE5AEEB1ACC56C400E97198 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		DEE5AEED1ACC570500E97198 /* DismissAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissAnimation.h; sourceTree = "<group>"; };
 		DEE5AEEE1ACC570500E97198 /* DismissAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissAnimation.m; sourceTree = "<group>"; };
-		DEE5AEF01ACC574A00E97198 /* SwipeUpInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeUpInteractiveTransition.h; sourceTree = "<group>"; };
-		DEE5AEF11ACC574A00E97198 /* SwipeUpInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeUpInteractiveTransition.m; sourceTree = "<group>"; };
 		DEE5AEF91ACC585000E97198 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DEE5AEFB1ACC585900E97198 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -110,8 +107,6 @@
 				DEE5AEE91ACC567200E97198 /* AppearAnimation.m */,
 				DEE5AEED1ACC570500E97198 /* DismissAnimation.h */,
 				DEE5AEEE1ACC570500E97198 /* DismissAnimation.m */,
-				DEE5AEF01ACC574A00E97198 /* SwipeUpInteractiveTransition.h */,
-				DEE5AEF11ACC574A00E97198 /* SwipeUpInteractiveTransition.m */,
 				DE96BDAE1ACC656200549565 /* lls.png */,
 				DEDA4ABA1ACC375900FB0348 /* Images.xcassets */,
 				DEDA4AAD1ACC375900FB0348 /* Supporting Files */,
@@ -250,7 +245,6 @@
 				DEE5AEEA1ACC567200E97198 /* AppearAnimation.m in Sources */,
 				DEDA4AB31ACC375900FB0348 /* AppDelegate.m in Sources */,
 				DEE5AEEF1ACC570500E97198 /* DismissAnimation.m in Sources */,
-				DEE5AEF21ACC574A00E97198 /* SwipeUpInteractiveTransition.m in Sources */,
 				DEDA4AB01ACC375900FB0348 /* main.m in Sources */,
 				DEE5AEE71ACC55A300E97198 /* ChildViewController.m in Sources */,
 			);

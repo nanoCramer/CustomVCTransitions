@@ -10,7 +10,6 @@
 #import "ChildViewController.h"
 #import "AppearAnimation.h"
 #import "DismissAnimation.h"
-#import "SwipeUpInteractiveTransition.h"
 
 #define KImageLength        72
 #define KMainImageTag       1001
@@ -21,7 +20,6 @@
 @interface MainViewController ()<ChildViewControllerDelegate,UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) AppearAnimation *presentAnimation;
 @property (nonatomic, strong) DismissAnimation *dismissAnimation;
-@property (nonatomic, strong) SwipeUpInteractiveTransition *transitionController;
 
 @end
 
@@ -34,7 +32,6 @@
         // Custom initialization
         _presentAnimation = [[AppearAnimation alloc] init];
         _dismissAnimation = [[DismissAnimation alloc] init];
-        _transitionController = [[SwipeUpInteractiveTransition alloc] init];
     }
     return self;
 }
@@ -75,7 +72,6 @@
     ChildViewController *mvc =  [[ChildViewController alloc] init];
     mvc.transitioningDelegate = self;
     mvc.delegate = self;
-    [self.transitionController wireToViewController:mvc];
     [self presentViewController:mvc animated:YES completion:nil];
 }
 
@@ -98,10 +94,6 @@
 -(id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
 {
     return self.dismissAnimation;
-}
-
--(id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id<UIViewControllerAnimatedTransitioning>)animator {
-    return self.transitionController.interacting ? self.transitionController : nil;
 }
 
 @end
