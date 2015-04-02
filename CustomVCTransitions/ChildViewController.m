@@ -13,12 +13,15 @@
 #define KButtonY            400.0
 #define KAnimateDuration    0.5
 
-#define KImageLength    72
-#define KImageH         150
-#define KImageTag       1001
+#define KImageLength        72
+#define KImageH             150
+
+#define KChildImageTag      1002
+#define KChildButtonTag     1003
+#define KChildBGTag         1004
 
 @interface ChildViewController () {
-    UIButton *button;
+    //    UIButton *button;
 }
 
 @end
@@ -38,32 +41,29 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor colorWithRed:0.4f green:0.8f blue:1 alpha:1];
+    self.view.backgroundColor = [UIColor clearColor];
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     CGFloat width = screenBounds.size.width;
     
-    button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button.frame = CGRectMake((screenBounds.size.width - KButtonW)/2, screenBounds.size.height, KButtonW, KButtonH);
-    [button setTitle:@"Dismiss me" forState:UIControlStateNormal];
-    [button.titleLabel setFont:[UIFont boldSystemFontOfSize:18.0]];
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:button];
+    UIView *bgView = [[UIView alloc] initWithFrame:self.view.frame];
+    [bgView setBackgroundColor:[UIColor colorWithRed:0.4f green:0.8f blue:1 alpha:1]];
+    bgView.tag = KChildButtonTag;
+    [self.view addSubview:bgView];
+    
+    UIButton *dismissButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    dismissButton.frame = CGRectMake((screenBounds.size.width - KButtonW)/2, KButtonY, KButtonW, KButtonH);
+    [dismissButton setTag:KChildButtonTag];
+    [dismissButton setTitle:@"Dismiss me" forState:UIControlStateNormal];
+    [dismissButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18.0]];
+    [dismissButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [dismissButton addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:dismissButton];
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((width - KImageLength)/2, KImageH, KImageLength, KImageLength)];
     [imageView setImage:[UIImage imageNamed:@"lls.png"]];
-    [imageView setTag:KImageTag];
+    [imageView setTag:KChildImageTag];
     [self.view addSubview:imageView];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    
-    [UIView animateWithDuration:KAnimateDuration animations:^{
-        button.frame = CGRectMake((screenBounds.size.width - KButtonW)/2, KButtonY, KButtonW, KButtonH);
-    } completion:^(BOOL finished) {
-    }];
 }
 
 -(void) buttonClicked:(id)sender

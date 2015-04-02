@@ -12,11 +12,11 @@
 #import "DismissAnimation.h"
 #import "SwipeUpInteractiveTransition.h"
 
-#define KImageLength    72
-#define KImageTag       1001
+#define KImageLength        72
+#define KMainImageTag       1001
 
-#define KViewLength     100
-#define KViewTag        1000
+#define KViewLength         100
+#define KMainScaleViewTag   1000
 
 @interface MainViewController ()<ChildViewControllerDelegate,UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) AppearAnimation *presentAnimation;
@@ -44,12 +44,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    CGFloat width = screenBounds.size.width;
-    CGFloat height = screenBounds.size.height;
+    CGFloat screenWidth = screenBounds.size.width;
+    CGFloat screenHeight = screenBounds.size.height;
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, KImageLength, KImageLength)];
-    [imageView setImage:[UIImage imageNamed:@"lls.png"]];
-    [imageView setTag:KImageTag];
+    UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, KImageLength, KImageLength)];
+    [logoImageView setImage:[UIImage imageNamed:@"lls.png"]];
+    [logoImageView setTag:KMainImageTag];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     button.frame = CGRectMake(0, 0, KViewLength, KViewLength);
@@ -57,20 +57,20 @@
     [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     UIView *scaleview = [[UIView alloc] init];
-    [scaleview setTag:KViewTag];
-    [scaleview setFrame:CGRectMake((width - KViewLength)/2, (height - KViewLength)/2, KViewLength, KViewLength)];
+    [scaleview setTag:KMainScaleViewTag];
+    [scaleview setFrame:CGRectMake((screenWidth - KViewLength)/2, (screenHeight - KViewLength)/2, KViewLength, KViewLength)];
     [scaleview.layer setCornerRadius:KViewLength/2];
     [scaleview setBackgroundColor:[UIColor colorWithRed:0.4f green:0.8f blue:1 alpha:1]];
     
-    imageView.center = scaleview.center;
+    logoImageView.center = scaleview.center;
     button.center = scaleview.center;
     
     [self.view addSubview:scaleview];
     [self.view addSubview:button];
-    [self.view addSubview:imageView];
+    [self.view addSubview:logoImageView];
 }
 
--(void) buttonClicked:(id)sender
+- (void)buttonClicked:(id)sender
 {
     ChildViewController *mvc =  [[ChildViewController alloc] init];
     mvc.transitioningDelegate = self;
@@ -79,7 +79,7 @@
     [self presentViewController:mvc animated:YES completion:nil];
 }
 
--(void)childViewControllerDidClickedDismissButton:(ChildViewController *)viewController
+- (void)childViewControllerDidClickedDismissButton:(ChildViewController *)viewController
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

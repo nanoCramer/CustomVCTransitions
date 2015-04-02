@@ -8,9 +8,11 @@
 
 #import "AppearAnimation.h"
 
-#define KImageTag       1001
-#define KViewTag        1000
-#define KImageH         150
+#define KMainScaleViewTag   1000
+#define KMainImageTag       1001
+#define KChildImageTag      1002
+#define KChildButtonTag     1003
+#define KChildBGTag         1004
 
 @implementation AppearAnimation
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext
@@ -25,6 +27,7 @@
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     
     // 2. Set init frame for toVC
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
     CGRect finalFrame = [transitionContext finalFrameForViewController:toVC];
     toVC.view.frame = finalFrame;
     
@@ -32,26 +35,57 @@
     UIView *containerView = [transitionContext containerView];
     [containerView addSubview:toVC.view];
     
-    UIView *scaleView;
-    UIView *logoView;
+    UIView *mainScaleView;
+    UIView *mainLogoView;
+    UIView *childLogoView;
+    UIView *childButtonView;
+    UIView *childBGView;
     for (UIView *view in fromVC.view.subviews) {
-        if (view.tag == KViewTag) {
-            scaleView = view;
-        } else if (view.tag == KImageTag) {
-            logoView = view;
+        if (view.tag == KMainScaleViewTag) {
+            mainScaleView = view;
+        } else if (view.tag == KMainImageTag) {
+            mainLogoView = view;
         }
     }
-    CGRect logoRect = logoView.frame;
+    for (UIView *view in toVC.view.subviews) {
+        if (view.tag == KChildImageTag) {
+            childLogoView = view;
+        } else if (view.tag == KChildButtonTag) {
+            childButtonView = view;
+        } else if (view.tag == KChildBGTag) {
+            childBGView = view;
+        }
+    }
+    
+    CGRect fromLogoRect = mainLogoView.frame;
+    CGRect toLogoRect = childLogoView.frame;
+    
+    CGRect toChildButtonRect = childButtonView.frame;
+    CGRect fromChildButtonRect = CGRectMake(toChildButtonRect.origin.x, screenBounds.size.height, toChildButtonRect.size.width, toChildButtonRect.size.height);
     
     // 4. Do animate now
+    mainLogoView.frame = fromLogoRect;
+    childBGView.alpha = 0;
+    childLogoView.alpha = 0;
     toVC.view.alpha = 0;
-    [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
-        scaleView.transform = CGAffineTransformMakeScale(10, 10);
-        logoView.frame = CGRectMake(logoRect.origin.x, KImageH, logoRect.size.width, logoRect.size.height);
+    [UIView animateWithDuration:0.5 animations:^{
+        mainScaleView.transform = CGAffineTransformMakeScale(10, 10);
+        mainLogoView.frame = toLogoRect;
+        childBGView.alpha = 0;
+        childLogoView.alpha = 0;
     } completion:^(BOOL finished) {
-        scaleView.transform = CGAffineTransformMakeScale(1, 1);
+        mainScaleView.transform = CGAffineTransformMakeScale(1, 1);
+        mainLogoView.frame = fromLogoRect;
+        childBGView.alpha = 1;
+        childLogoView.alpha = 1;
         toVC.view.alpha = 1;
-        [transitionContext completeTransition:YES];
+        
+        [childButtonView setFrame:fromChildButtonRect];
+        [UIView animateWithDuration:([self transitionDuration:transitionContext] - 0.5) animations:^{
+            [childButtonView setFrame:toChildButtonRect];
+        } completion:^(BOOL finished) {
+            [transitionContext completeTransition:YES];
+        }];
     }];
 }
 @end
