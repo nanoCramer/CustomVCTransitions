@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C7DF328B1AD3EFBD0050A5CC /* DrawCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DF328A1AD3EFBD0050A5CC /* DrawCircleView.m */; };
 		DE96BDAF1ACC656200549565 /* lls.png in Resources */ = {isa = PBXBuildFile; fileRef = DE96BDAE1ACC656200549565 /* lls.png */; };
 		DEDA4AB01ACC375900FB0348 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DEDA4AAF1ACC375900FB0348 /* main.m */; };
 		DEDA4AB31ACC375900FB0348 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DEDA4AB21ACC375900FB0348 /* AppDelegate.m */; };
@@ -32,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C7DF32891AD3EFBD0050A5CC /* DrawCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawCircleView.h; sourceTree = "<group>"; };
+		C7DF328A1AD3EFBD0050A5CC /* DrawCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawCircleView.m; sourceTree = "<group>"; };
 		DE96BDAE1ACC656200549565 /* lls.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lls.png; sourceTree = "<group>"; };
 		DEDA4AAA1ACC375900FB0348 /* CustomVCTransitions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomVCTransitions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEDA4AAE1ACC375900FB0348 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -107,6 +110,8 @@
 				DEE5AEE91ACC567200E97198 /* AppearAnimation.m */,
 				DEE5AEED1ACC570500E97198 /* DismissAnimation.h */,
 				DEE5AEEE1ACC570500E97198 /* DismissAnimation.m */,
+				C7DF32891AD3EFBD0050A5CC /* DrawCircleView.h */,
+				C7DF328A1AD3EFBD0050A5CC /* DrawCircleView.m */,
 				DE96BDAE1ACC656200549565 /* lls.png */,
 				DEDA4ABA1ACC375900FB0348 /* Images.xcassets */,
 				DEDA4AAD1ACC375900FB0348 /* Supporting Files */,
@@ -244,6 +249,7 @@
 				DEDA4AB61ACC375900FB0348 /* MainViewController.m in Sources */,
 				DEE5AEEA1ACC567200E97198 /* AppearAnimation.m in Sources */,
 				DEDA4AB31ACC375900FB0348 /* AppDelegate.m in Sources */,
+				C7DF328B1AD3EFBD0050A5CC /* DrawCircleView.m in Sources */,
 				DEE5AEEF1ACC570500E97198 /* DismissAnimation.m in Sources */,
 				DEDA4AB01ACC375900FB0348 /* main.m in Sources */,
 				DEE5AEE71ACC55A300E97198 /* ChildViewController.m in Sources */,

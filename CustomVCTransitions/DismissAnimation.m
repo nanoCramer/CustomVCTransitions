@@ -13,6 +13,7 @@
 #define KChildImageTag      1002
 #define KChildButtonTag     1003
 #define KChildBGTag         1004
+#define KMainDCViewTag      1005
 
 @implementation DismissAnimation
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext
@@ -36,6 +37,7 @@
     
     UIView *mainScaleView;
     UIView *mainLogoView;
+    UIView *mainDCView;
     UIView *childLogoView;
     UIView *childButtonView;
     UIView *childBGView;
@@ -44,6 +46,8 @@
             mainScaleView = view;
         } else if (view.tag == KMainImageTag) {
             mainLogoView = view;
+        } else if (view.tag == KMainDCViewTag) {
+            mainDCView = view;
         }
     }
     for (UIView *view in fromVC.view.subviews) {
@@ -71,9 +75,11 @@
         fromVC.view.alpha = 0;
         mainScaleView.transform = CGAffineTransformMakeScale(10, 10);
         mainLogoView.frame = fromLogoRect;
+        mainDCView.alpha = 0;
         [UIView animateWithDuration:(duration - 0.2) animations:^{
             mainScaleView.transform = CGAffineTransformMakeScale(1, 1);
             mainLogoView.frame = toLogoRect;
+            mainDCView.alpha = 1;
         } completion:^(BOOL finished) {
             [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         }];

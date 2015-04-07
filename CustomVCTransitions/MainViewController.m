@@ -10,12 +10,15 @@
 #import "ChildViewController.h"
 #import "AppearAnimation.h"
 #import "DismissAnimation.h"
+#import "DrawCircleView.h"
 
 #define KImageLength        72
 #define KMainImageTag       1001
 
 #define KViewLength         100
 #define KMainScaleViewTag   1000
+
+#define KMainDCViewTag      1005
 
 @interface MainViewController ()<ChildViewControllerDelegate,UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) AppearAnimation *presentAnimation;
@@ -62,7 +65,16 @@
     logoImageView.center = scaleview.center;
     button.center = scaleview.center;
     
+    DrawCircleView *dcView = [[DrawCircleView alloc] initWithFrame:CGRectMake(0, 0, KViewLength+6, KViewLength+6)];
+    [dcView setLineWidth:3 lineColor:[UIColor orangeColor] startValue:0 endValue:1 duration:0.5];
+    dcView.tag = KMainDCViewTag;
+    
+    logoImageView.center = scaleview.center;
+    button.center = scaleview.center;
+    dcView.center = scaleview.center;
+    
     [self.view addSubview:scaleview];
+    [self.view addSubview:dcView];
     [self.view addSubview:button];
     [self.view addSubview:logoImageView];
 }
